@@ -1,4 +1,4 @@
-import { NextRequest } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 
 import * as nosecone from "@nosecone/next";
 
@@ -27,6 +27,19 @@ function createNoseconeConfig(nonce: string): nosecone.NoseconeOptions {
 }
 
 export async function middleware(request: NextRequest) {
+  // Performance optimization: Skip middleware for static assets
+  // This prevents unnecessary header processing for static files
+  const { pathname } = request.nextUrl;
+  if (
+    pathname.startsWith("/_next") ||
+    pathname.startsWith("/api") ||
+    pathname.match(
+      /\.(ico|png|jpg|jpeg|gif|svg|webp|avif|mp4|webm|mov|avi|css|js|woff|woff2|ttf|eot|otf|pdf|zip|rar|7z|mp3|wav|ogg|m4a|json|xml|txt|md)$/
+    )
+  ) {
+    return NextResponse.next();
+  }
+
   // Generate a fresh nonce for this request
   let requestNonce: string;
   try {
@@ -41,25 +54,21 @@ export async function middleware(request: NextRequest) {
   // Create request-specific nosecone config
   const noseconeConfig = createNoseconeConfig(requestNonce);
 
-  // Create middleware with request-specific config
-  const noseconeMiddleware = nosecone.createMiddleware(
-    process.env.VERCEL_ENV === "preview"
-      ? nosecone.withVercelToolbar(noseconeConfig)
-      : noseconeConfig
-  ) as (req: NextRequest) => Promise<Response>;
+  // Apply nosecone security headers to the response
+  const noseconeHeaders = nosecone.default(noseconeConfig);
 
-  // Add nonce to request headers
-  const requestHeaders = new Headers(request.headers);
-  requestHeaders.set("x-nonce", requestNonce);
-
-  // Pass the mutated request to the downstream middleware / app
-  const clonedRequest = new NextRequest(request.url, {
-    headers: requestHeaders,
-    method: request.method,
-    ...(request.body && { body: request.body }),
+  // Create a response that will be modified with security headers
+  // but still allow the request to continue to the next middleware
+  const response = NextResponse.next({
+    request: {
+      headers: request.headers,
+    },
   });
 
-  const response = await noseconeMiddleware(clonedRequest);
+  // Apply nosecone security headers to the response
+  noseconeHeaders.forEach((value: string, key: string) => {
+    response.headers.set(key, value);
+  });
 
   // Add nonce to response headers for client-side access
   response.headers.set("x-nonce", requestNonce);
