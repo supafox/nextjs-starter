@@ -56,7 +56,7 @@ export default function MainLayout({
   return (
     <m.div {...animationConfig}>
       <MainNavbar />
-      <main className="flex-1 container py-16 min-h-screen">{children}</main>
+      <main className="flex-1 container pt-16 min-h-dvh">{children}</main>
       <MainFooter />
       <TailwindIndicator />
     </m.div>

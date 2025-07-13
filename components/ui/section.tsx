@@ -41,8 +41,18 @@ function buildGapClasses(gap: SectionProps["gap"]): string[] {
     // Handle responsive gap with proper CSS cascade
     const responsiveGapClasses: string[] = [];
 
+    // Set a default base gap (use the smallest breakpoint or default to 0)
+    const defaultGap = gap.sm || gap.md || gap.lg || gap.xl || gap["2xl"] || 0;
+    const defaultGapClass = gapClasses[""]?.[defaultGap];
+    if (defaultGapClass) {
+      flexClassNames.push(defaultGapClass);
+    }
+
     // Iterate over responsive breakpoints to handle gap classes dynamically
-    RESPONSIVE_BREAKPOINTS.forEach((breakpoint) => {
+    // Skip the smallest breakpoint since it's already set as the base
+    const breakpointsToProcess = RESPONSIVE_BREAKPOINTS.slice(1); // Skip 'sm'
+
+    breakpointsToProcess.forEach((breakpoint) => {
       const gapValue = gap[breakpoint];
       if (gapValue) {
         const gapClass = gapClasses[breakpoint]?.[gapValue];
@@ -70,7 +80,7 @@ export function Section({
   className,
 }: SectionProps) {
   // Build base padding class
-  const basePaddingClass = hero ? "py-25" : "py-12";
+  const basePaddingClass = hero ? "py-25" : "py-16";
 
   // Build section content with appropriate padding
   const sectionContent = (

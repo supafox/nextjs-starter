@@ -1,6 +1,5 @@
 import Link from "next/link";
 
-import { providers } from "@/data/providers";
 import * as AllIcons from "@supafox/icons";
 
 import { buttonVariants } from "@/components/ui/button";
@@ -8,6 +7,55 @@ import { Grid, GridCell } from "@/components/ui/grid";
 import { Section } from "@/components/ui/section";
 import { Stack } from "@/components/ui/stack";
 import { Copy, Header } from "@/components/ui/text";
+
+interface Provider {
+  name: string;
+  logo: string;
+  url: string;
+}
+
+const providers: Provider[] = [
+  {
+    name: "Supafox",
+    logo: "LogoSupafox",
+    url: "https://supafox.dev",
+  },
+  {
+    name: "Next.js",
+    logo: "LogoNext",
+    url: "https://nextjs.org",
+  },
+  {
+    name: "Tailwind CSS",
+    logo: "LogoTailwindcss",
+    url: "https://tailwindcss.com",
+  },
+  {
+    name: "Shadcn",
+    logo: "LogoShadcn",
+    url: "https://ui.shadcn.com",
+  },
+  {
+    name: "Motion",
+    logo: "LogoMotion",
+    url: "https://motion.dev",
+  },
+  {
+    name: "ESLint",
+    logo: "LogoEslint",
+    url: "https://eslint.org",
+  },
+  {
+    name: "Prettier",
+    logo: "LogoPrettier",
+    url: "https://prettier.io",
+  },
+  {
+    name: "Contentlayer2",
+    logo: "LogoContentlayer",
+    url: "https://github.com/timlrx/contentlayer2",
+  },
+];
 
 // Type guard to safely check if an icon exists in AllIcons
 function isValidIcon(iconName: string): iconName is keyof typeof AllIcons {
@@ -59,7 +107,7 @@ export default function Home() {
         <Stack gap={2} direction="row">
           <Link
             className={buttonVariants()}
-            href="https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fsupafox%2Fsupafox-starter"
+            href="https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fsupafox%2Fnextjs-starter"
             target="_blank"
             rel="noopener noreferrer"
           >

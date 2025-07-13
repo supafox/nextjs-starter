@@ -24,44 +24,48 @@ export default function LegalsPage() {
     });
 
   return (
-    <Section id="header" gap={8}>
-      <MdxHeader
-        heading="Legal"
-        text="This section includes legal documents for the app."
-      />
-      {legals?.length ? (
-        <Grid columns={{ sm: 1, md: 2 }} gap={4}>
-          {legals.map((legal) => (
-            <Link
-              key={legal._id}
-              href={legal.slug}
-              className="group relative rounded-lg border p-6 shadow-md transition-shadow hover:shadow-lg"
-            >
-              <Stack gap={4}>
-                <Stack gap={2}>
-                  <Header as="h2" size="24">
-                    {legal.pageTitle}
-                  </Header>
-                  {legal.pageDescription && (
-                    <Copy className="text-muted-foreground">
-                      {legal.pageDescription}
+    <>
+      <Section id="hero" gap={8} fullWidth hero className="bg-card">
+        <MdxHeader
+          heading="Legal"
+          text="This section includes legal documents for the app."
+        />
+      </Section>
+      <Section id="content" gap={8}>
+        {legals?.length ? (
+          <Grid columns={{ sm: 1, md: 2 }} gap={4}>
+            {legals.map((legal) => (
+              <Link
+                key={legal._id}
+                href={legal.slug}
+                className="group relative rounded-lg border p-6 shadow-md transition-shadow hover:shadow-lg"
+              >
+                <Stack gap={4}>
+                  <Stack gap={2}>
+                    <Header as="h2" size="24">
+                      {legal.pageTitle}
+                    </Header>
+                    {legal.pageDescription && (
+                      <Copy className="text-muted-foreground">
+                        {legal.pageDescription}
+                      </Copy>
+                    )}
+                  </Stack>
+                  {legal.date && (
+                    <Copy size="14" className="text-muted-foreground">
+                      {formatDate(legal.date)}
                     </Copy>
                   )}
                 </Stack>
-                {legal.date && (
-                  <Copy size="14" className="text-muted-foreground">
-                    {formatDate(legal.date)}
-                  </Copy>
-                )}
-              </Stack>
-            </Link>
-          ))}
-        </Grid>
-      ) : (
-        <Copy className="text-muted-foreground">
-          No legal documents published.
-        </Copy>
-      )}
-    </Section>
+              </Link>
+            ))}
+          </Grid>
+        ) : (
+          <Copy className="text-muted-foreground">
+            No legal documents published.
+          </Copy>
+        )}
+      </Section>
+    </>
   );
 }

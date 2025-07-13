@@ -5,7 +5,9 @@ import { usePathname } from "next/navigation";
 import { Icons } from "@/assets/icons";
 import { siteConfig } from "@/data/site";
 import { Cross, Menu } from "@supafox/icons";
+import { AnimatePresence, motion as m } from "motion/react";
 
+import { Separator } from "@/components/ui/separator";
 import { ThemeToggle } from "@/components/ui/theme-toggle";
 
 export default function MainNavbar() {
@@ -30,7 +32,11 @@ export default function MainNavbar() {
           >
             <div className="flex space-x-1.5 items-center">
               <Icons.logo className="size-6 text-primary" />
-              <span className="text-heading-20">{siteConfig.name}</span>
+              <span
+                className={`text-heading-20 ${pathname === "/" ? "underline decoration-primary decoration-[0.2rem]" : ""}`}
+              >
+                {siteConfig.name}
+              </span>
             </div>
           </Link>
           {/* Desktop Navigation */}
@@ -43,7 +49,9 @@ export default function MainNavbar() {
                     <Link
                       href={link.href}
                       className={`hover:text-muted-foreground transition-colors ${
-                        isActive ? "text-primary" : ""
+                        isActive
+                          ? "underline decoration-primary decoration-[0.2rem]"
+                          : ""
                       }`}
                     >
                       {link.title}
@@ -56,7 +64,9 @@ export default function MainNavbar() {
         </div>
 
         <div className="flex items-center space-x-4">
-          <ThemeToggle />
+          <div className="hidden md:block">
+            <ThemeToggle />
+          </div>
           {/* Mobile Menu Button */}
           <button
             onClick={toggleMobileMenu}
@@ -73,30 +83,45 @@ export default function MainNavbar() {
       </div>
 
       {/* Mobile Navigation Menu */}
-      {isMobileMenuOpen && (
-        <div className="md:hidden border-t border-border bg-background">
-          <nav className="container py-4">
-            <ul className="space-y-2">
-              {siteConfig.mainNav.map((link) => {
-                const isActive = pathname === link.href;
-                return (
-                  <li key={link.href}>
-                    <Link
-                      href={link.href}
-                      onClick={closeMobileMenu}
-                      className={`block py-3 px-4 rounded-md transition-colors hover:text-muted-foreground ${
-                        isActive ? "text-primary" : ""
-                      }`}
-                    >
-                      {link.title}
-                    </Link>
-                  </li>
-                );
-              })}
-            </ul>
-          </nav>
-        </div>
-      )}
+      <AnimatePresence>
+        {isMobileMenuOpen && (
+          <m.div
+            initial={{ opacity: 0, y: 0, height: 0 }}
+            animate={{ opacity: 1, y: 0, height: "100vh" }}
+            exit={{ opacity: 0, y: 0, height: 0 }}
+            transition={{
+              duration: 0.3,
+              ease: "easeInOut",
+            }}
+            className="md:hidden bg-background fixed top-16 left-0 right-0 overflow-hidden z-40"
+          >
+            <nav className="mt-8 container">
+              <ul className="space-y-8">
+                {siteConfig.mainNav.map((link) => {
+                  const isActive = pathname === link.href;
+                  return (
+                    <li key={link.href}>
+                      <Link
+                        href={link.href}
+                        onClick={closeMobileMenu}
+                        className={`text-button-16 transition-colors hover:text-muted-foreground ${
+                          isActive
+                            ? "underline decoration-primary decoration-[0.2rem] "
+                            : ""
+                        }`}
+                      >
+                        {link.title}
+                      </Link>
+                    </li>
+                  );
+                })}
+                <Separator />
+                <ThemeToggle />
+              </ul>
+            </nav>
+          </m.div>
+        )}
+      </AnimatePresence>
     </header>
   );
 }

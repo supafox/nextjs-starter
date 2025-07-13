@@ -1,37 +1,29 @@
 import Link from "next/link";
 
-import { Icons } from "@/assets/icons";
+import { Copy } from "@/components/ui/text";
+
+import { Stack } from "../ui/stack";
 
 export default function MainFooter() {
   return (
-    <footer className="w-full h-16 items-center justify-center flex space-x-4 border-t border-border">
-      <Link
-        className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-        href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-        target="_blank"
-        rel="noopener noreferrer"
+    <footer className="min-h-16 py-6 md:py-0 flex items-center border-t border-border">
+      <Stack
+        direction={{ sm: "column", md: "row" }}
+        gap={4}
+        className="items-center md:justify-between container"
       >
-        <Icons.file className="size-4" />
-        Learn
-      </Link>
-      <Link
-        className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-        href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        <Icons.window className="size-4" />
-        Examples
-      </Link>
-      <Link
-        className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-        href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        <Icons.globe className="size-4" />
-        Go to nextjs.org →
-      </Link>
+        <Copy size="14">
+          SuperBrand &copy; {new Date().getFullYear()}. All rights reserved.
+        </Copy>
+        <Stack gap={4} direction="row">
+          <Link href="/privacy" className="text-copy-14 hover:underline">
+            Privacy
+          </Link>
+          <Link href="/terms" className="text-copy-14 hover:underline">
+            Terms
+          </Link>
+        </Stack>
+      </Stack>
     </footer>
   );
 }

@@ -104,16 +104,16 @@ export default async function LegalPage({ params }: Props) {
 
   return (
     <>
-      <Section id="header" gap={8}>
+      <Section id="hero" gap={8} fullWidth hero className="bg-card">
         <Stack gap={2}>
           <MdxHeader heading={legal.pageTitle} text={legal.pageDescription} />
-          <Mdx code={legal.body.code} />
         </Stack>
       </Section>
       <Section id="content" gap={8}>
+        <Mdx code={legal.body.code} />
         <Link
           href="/legal"
-          className={cn(buttonVariants({ variant: "ghost" }))}
+          className={cn(buttonVariants({ variant: "ghost" }), "w-fit mx-auto")}
         >
           <ChevronRight height={16} className="mr-2" />
           See all legal docs

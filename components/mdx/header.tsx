@@ -22,7 +22,6 @@ export function MdxHeader({
         </Header>
         {text && <Copy>{text}</Copy>}
       </Stack>
-      <hr className="my-4" />
     </>
   );
 }

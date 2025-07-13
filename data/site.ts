@@ -4,8 +4,8 @@ export const siteConfig = {
   name: "Supafox",
   mainNav: [
     {
-      title: "Home",
-      href: "/",
+      title: "Legal",
+      href: "/legal",
     },
     {
       title: "Terms",

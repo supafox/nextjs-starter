@@ -47,7 +47,7 @@ export default async function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body
-        className={`${fontSans.variable} ${fontMono.variable} min-h-screen bg-background font-sans text-copy-16 antialiased`}
+        className={`${fontSans.variable} ${fontMono.variable} bg-background font-sans text-copy-16 antialiased`}
       >
         <ThemeProvider
           attribute="class"
