@@ -48,15 +48,28 @@ const components = {
     children,
     href,
     ...props
-  }: ComponentProps & { href: string }) => (
-    <Link
-      href={href}
-      className={cn("text-copy-16 underline underline-offset-4", className)}
-      {...props}
-    >
-      {children}
-    </Link>
-  ),
+  }: ComponentProps & { href: string }) =>
+    href.startsWith("http") ||
+    href.startsWith("mailto:") ||
+    href.startsWith("tel:") ? (
+      <a
+        href={href}
+        className={cn("text-copy-16 underline underline-offset-4", className)}
+        target={href.startsWith("http") ? "_blank" : undefined}
+        rel={href.startsWith("http") ? "noopener noreferrer" : undefined}
+        {...props}
+      >
+        {children}
+      </a>
+    ) : (
+      <Link
+        href={href}
+        className={cn("text-copy-16 underline underline-offset-4", className)}
+        {...props}
+      >
+        {children}
+      </Link>
+    ),
   p: ({ className, children, ...props }: ComponentProps) => (
     <Copy
       className={cn("text-copy-16 [&:not(:first-child)]:mt-6", className)}

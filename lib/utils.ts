@@ -19,25 +19,34 @@ export function buildResponsiveGridClasses(
 
   const classes: string[] = [];
 
-  // Set a default base value (use the smallest breakpoint or default to 1)
-  const defaultValue =
-    value.sm || value.md || value.lg || value.xl || value["2xl"] || 1;
-  const defaultClassName = classMap[""]?.[defaultValue];
+  // Find the smallest defined breakpoint to use as base
+  let baseBreakpoint: string | null = null;
+  let baseValue: number | null = null;
+
+  for (const bp of ["sm", "md", "lg", "xl", "2xl"]) {
+    if (value[bp]) {
+      baseBreakpoint = bp;
+      baseValue = value[bp];
+      break;
+    }
+  }
+
+  // Set base class if we found a value, otherwise default to 1
+  const finalBaseValue = baseValue || 1;
+  const defaultClassName = classMap[""]?.[finalBaseValue];
   if (defaultClassName) {
     classes.push(defaultClassName);
   }
 
-  // Skip the smallest breakpoint since it's already set as the base
-  const breakpointsToProcess = RESPONSIVE_BREAKPOINTS.slice(1); // Skip 'sm'
-
-  breakpointsToProcess.forEach((breakpoint) => {
+  // Process breakpoints, skipping the one used as base
+  RESPONSIVE_BREAKPOINTS.forEach((breakpoint) => {
+    if (breakpoint === baseBreakpoint) return; // Skip the base breakpoint
     const breakpointValue = value[breakpoint];
     if (breakpointValue) {
       const className = classMap[breakpoint]?.[breakpointValue];
       if (className) {
         classes.push(className);
       }
-      // Silently ignore invalid values to prevent dynamic class generation
     }
   });
 

@@ -5,7 +5,7 @@ import { usePathname } from "next/navigation";
 import { Icons } from "@/assets/icons";
 import { siteConfig } from "@/data/site";
 import { Cross, Menu } from "@supafox/icons";
-import { AnimatePresence, motion as m } from "motion/react";
+import { AnimatePresence, motion } from "motion/react";
 
 import { Separator } from "@/components/ui/separator";
 import { ThemeToggle } from "@/components/ui/theme-toggle";
@@ -85,7 +85,7 @@ export default function MainNavbar() {
       {/* Mobile Navigation Menu */}
       <AnimatePresence>
         {isMobileMenuOpen && (
-          <m.div
+          <motion.div
             initial={{ opacity: 0, y: 0, height: 0 }}
             animate={{ opacity: 1, y: 0, height: "100vh" }}
             exit={{ opacity: 0, y: 0, height: 0 }}
@@ -93,6 +93,7 @@ export default function MainNavbar() {
               duration: 0.3,
               ease: "easeInOut",
             }}
+            style={{ animationDuration: "var(--animation-duration, 0.3s)" }}
             className="md:hidden bg-background fixed top-16 left-0 right-0 overflow-hidden z-40"
           >
             <nav className="mt-8 container">
@@ -119,7 +120,7 @@ export default function MainNavbar() {
                 <ThemeToggle />
               </ul>
             </nav>
-          </m.div>
+          </motion.div>
         )}
       </AnimatePresence>
     </header>

@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 
-import { motion as m } from "motion/react";
+import { motion } from "motion/react";
 
 import MainFooter from "@/components/layout/main-footer";
 import MainNavbar from "@/components/layout/main-navbar";
@@ -54,11 +54,11 @@ export default function MainLayout({
       };
 
   return (
-    <m.div {...animationConfig}>
+    <motion.div {...animationConfig}>
       <MainNavbar />
       <main className="flex-1 container pt-16 min-h-dvh">{children}</main>
       <MainFooter />
       <TailwindIndicator />
-    </m.div>
+    </motion.div>
   );
 }

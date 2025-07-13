@@ -16,10 +16,10 @@ export default function MainFooter() {
           SuperBrand &copy; {new Date().getFullYear()}. All rights reserved.
         </Copy>
         <Stack gap={4} direction="row">
-          <Link href="/privacy" className="text-copy-14 hover:underline">
+          <Link href="/legal/privacy" className="text-copy-14 hover:underline">
             Privacy
           </Link>
-          <Link href="/terms" className="text-copy-14 hover:underline">
+          <Link href="/legal/terms" className="text-copy-14 hover:underline">
             Terms
           </Link>
         </Stack>

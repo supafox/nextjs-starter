@@ -101,19 +101,29 @@ export function Grid({
     // Silently ignore invalid gap values in production
   } else if (gap) {
     // Handle responsive gap with proper validation
-    // Set a default base gap (use the smallest breakpoint or default to 0)
-    const defaultGap = gap.sm || gap.md || gap.lg || gap.xl || gap["2xl"] || 0;
-    if (isValidGapValue(defaultGap)) {
-      const defaultGapClass = gapClasses[""][defaultGap];
+    // Find the smallest defined breakpoint to use as base
+    let baseBreakpoint: string | null = null;
+    let baseGap: number | null = null;
+
+    for (const bp of ["sm", "md", "lg", "xl", "2xl"] as const) {
+      if (gap[bp] && isValidGapValue(gap[bp])) {
+        baseBreakpoint = bp;
+        baseGap = gap[bp];
+        break;
+      }
+    }
+
+    // Set base gap class
+    if (baseGap) {
+      const defaultGapClass = gapClasses[""][baseGap];
       if (defaultGapClass) {
         classNames.push(defaultGapClass);
       }
     }
 
-    // Skip the smallest breakpoint since it's already set as the base
-    const breakpointsToProcess = RESPONSIVE_BREAKPOINTS.slice(1); // Skip 'sm'
-
-    breakpointsToProcess.forEach((breakpoint) => {
+    // Process remaining breakpoints, skipping the one used as base
+    RESPONSIVE_BREAKPOINTS.forEach((breakpoint) => {
+      if (breakpoint === baseBreakpoint) return; // Skip the base breakpoint
       const gapValue = gap[breakpoint];
       if (gapValue && isValidGapValue(gapValue)) {
         const gapClass = gapClasses[breakpoint][gapValue];

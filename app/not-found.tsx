@@ -7,7 +7,7 @@ import { Copy, Header } from "@/components/ui/text";
 
 export default function NotFound() {
   return (
-    <Section id="not-found" className="flex flex-col py-0 -mt-16">
+    <Section id="not-found" className="py-0 -mt-16">
       <Stack gap={8} className="items-center justify-center h-dvh">
         <Stack gap={2} className="items-center justify-center">
           <Header as="h1" size="56">

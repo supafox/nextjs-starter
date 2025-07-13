@@ -2,17 +2,13 @@ import Link from "next/link";
 
 import * as AllIcons from "@supafox/icons";
 
+import { Provider } from "@/lib/types";
+
 import { buttonVariants } from "@/components/ui/button";
 import { Grid, GridCell } from "@/components/ui/grid";
 import { Section } from "@/components/ui/section";
 import { Stack } from "@/components/ui/stack";
 import { Copy, Header } from "@/components/ui/text";
-
-interface Provider {
-  name: string;
-  logo: string;
-  url: string;
-}
 
 const providers: Provider[] = [
   {

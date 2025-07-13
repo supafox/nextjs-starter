@@ -30,8 +30,6 @@ export default function robots(): MetadataRoute.Robots {
           "/test/",
           "/debug/",
           "/.well-known/",
-          "/robots.txt",
-          "/sitemap.xml",
         ],
       },
     ],
