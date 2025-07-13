@@ -18,8 +18,8 @@ importers:
         specifier: ^1.2.3
         version: 1.2.3(@types/react@19.1.8)(react@19.1.0)
       '@supafox/icons':
-        specifier: ^0.3.4
-        version: 0.3.4(react@19.1.0)
+        specifier: ^0.3.5
+        version: 0.3.5(react@19.1.0)
       class-variance-authority:
         specifier: ^0.7.1
         version: 0.7.1
@@ -999,8 +999,8 @@ packages:
   '@shikijs/vscode-textmate@10.0.2':
     resolution: {integrity: sha512-83yeghZ2xxin3Nj8z1NMd/NCuca+gsYXswywDy5bHvwlWL8tpTQmzGeUuHd9FC3E/SBEMvzJRwWEOz5gGes9Qg==}
 
-  '@supafox/icons@0.3.4':
-    resolution: {integrity: sha512-DKuIowN/s0tSz9A6b/swbvUojuuB54jwVofGWyvtX7E6QfrmYAPyIjIz12k8VzgUABHJhnfS5ue+MwfJG2kLMw==}
+  '@supafox/icons@0.3.5':
+    resolution: {integrity: sha512-dGtGsUuMi3e5TOIkcLtWkmz/e4x8QtLVyEYeDsrilO5MLxvHcvW17ZcVsFL1TA/KPv36TTGj9Gd7IREUxa0Owg==}
     peerDependencies:
       react: '>=16.8.0'
 
@@ -4512,7 +4512,7 @@ snapshots:
 
   '@shikijs/vscode-textmate@10.0.2': {}
 
-  '@supafox/icons@0.3.4(react@19.1.0)':
+  '@supafox/icons@0.3.5(react@19.1.0)':
     dependencies:
       react: 19.1.0
 
