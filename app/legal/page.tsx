@@ -5,6 +5,10 @@ import { compareDesc } from "date-fns";
 
 import { formatDate } from "@/lib/utils";
 
+import { Grid } from "@/components/ui/grid";
+import { Section } from "@/components/ui/section";
+import { Stack } from "@/components/ui/stack";
+import { Copy, Header } from "@/components/ui/text";
 import { MdxHeader } from "@/components/mdx/header";
 
 export const metadata = {
@@ -20,42 +24,44 @@ export default function LegalsPage() {
     });
 
   return (
-    <div className="container mx-auto w-full min-h-screen pt-32 pb-16">
+    <Section id="header" gap={8}>
       <MdxHeader
         heading="Legal"
         text="This section includes legal documents for the app."
       />
       {legals?.length ? (
-        <div className="grid gap-4 md:grid-cols-2 md:gap-6">
+        <Grid columns={{ sm: 1, md: 2 }} gap={4}>
           {legals.map((legal) => (
-            <article
+            <Link
               key={legal._id}
+              href={legal.slug}
               className="group relative rounded-lg border p-6 shadow-md transition-shadow hover:shadow-lg"
             >
-              <div className="flex flex-col justify-between space-y-4">
-                <div className="space-y-2">
-                  <h2 className="text-xl font-medium tracking-tight">
-                    {legal.title}
-                  </h2>
-                  {legal.description && (
-                    <p className="text-muted-foreground">{legal.description}</p>
+              <Stack gap={4}>
+                <Stack gap={2}>
+                  <Header as="h2" size="24">
+                    {legal.pageTitle}
+                  </Header>
+                  {legal.pageDescription && (
+                    <Copy className="text-muted-foreground">
+                      {legal.pageDescription}
+                    </Copy>
                   )}
-                </div>
+                </Stack>
                 {legal.date && (
-                  <p className="text-sm text-muted-foreground">
+                  <Copy size="14" className="text-muted-foreground">
                     {formatDate(legal.date)}
-                  </p>
+                  </Copy>
                 )}
-              </div>
-              <Link href={legal.slug} className="absolute inset-0">
-                <span className="sr-only">View</span>
-              </Link>
-            </article>
+              </Stack>
+            </Link>
           ))}
-        </div>
+        </Grid>
       ) : (
-        <p>No legal documents published.</p>
+        <Copy className="text-muted-foreground">
+          No legal documents published.
+        </Copy>
       )}
-    </div>
+    </Section>
   );
 }

@@ -17,6 +17,8 @@ import { ChevronRight } from "@supafox/icons";
 import { absoluteUrl, cn } from "@/lib/utils";
 
 import { buttonVariants } from "@/components/ui/button";
+import { Section } from "@/components/ui/section";
+import { Stack } from "@/components/ui/stack";
 
 type Props = {
   params: Promise<{ slug: string[] }>;
@@ -51,16 +53,16 @@ export async function generateMetadata(
   const previousImages = (await parent).openGraph?.images || [];
 
   const ogUrl = new URL("/api/og", url);
-  ogUrl.searchParams.set("heading", legal.title);
+  ogUrl.searchParams.set("heading", legal.metaTitle);
   ogUrl.searchParams.set("type", "Legal");
   ogUrl.searchParams.set("mode", "dark");
 
   return {
-    title: legal.title,
-    description: legal.description,
+    title: legal.metaTitle,
+    description: legal.metaDescription,
     openGraph: {
-      title: legal.title,
-      description: legal.description,
+      title: legal.metaTitle,
+      description: legal.metaDescription,
       type: "article",
       url: absoluteUrl(legal.slug),
       images: [
@@ -68,15 +70,15 @@ export async function generateMetadata(
           url: ogUrl.toString(),
           width: 1200,
           height: 630,
-          alt: legal.title,
+          alt: legal.metaTitle,
         },
         ...previousImages,
       ],
     },
     twitter: {
       card: "summary_large_image",
-      title: legal.title,
-      description: legal.description,
+      title: legal.metaTitle,
+      description: legal.metaDescription,
       images: [ogUrl.toString()],
     },
   };
@@ -101,22 +103,22 @@ export default async function LegalPage({ params }: Props) {
   }
 
   return (
-    <main className="container mx-auto w-full min-h-screen pt-32 pb-16">
-      <div>
-        <MdxHeader heading={legal.title} text={legal.description} />
-        <Mdx code={legal.body.code} />
-        <hr className="my-4" />
-        <h1 className="text-heading-24">Legal Documents</h1>
-        <div className="flex justify-center py-6 lg:py-10">
-          <Link
-            href="/legal"
-            className={cn(buttonVariants({ variant: "ghost" }))}
-          >
-            <ChevronRight height={16} className="mr-2" />
-            See all legal docs
-          </Link>
-        </div>
-      </div>
-    </main>
+    <>
+      <Section id="header" gap={8}>
+        <Stack gap={2}>
+          <MdxHeader heading={legal.pageTitle} text={legal.pageDescription} />
+          <Mdx code={legal.body.code} />
+        </Stack>
+      </Section>
+      <Section id="content" gap={8}>
+        <Link
+          href="/legal"
+          className={cn(buttonVariants({ variant: "ghost" }))}
+        >
+          <ChevronRight height={16} className="mr-2" />
+          See all legal docs
+        </Link>
+      </Section>
+    </>
   );
 }

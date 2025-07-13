@@ -1,59 +1,69 @@
 import * as React from "react";
 import Image from "next/image";
+import Link from "next/link";
 
 import { useMDXComponent } from "next-contentlayer2/hooks";
 
 import { cn } from "@/lib/utils";
+
+import { Copy, Header } from "@/components/ui/text";
 
 type ComponentProps = {
   className?: string;
 } & React.HTMLAttributes<HTMLElement>;
 
 const components = {
-  h1: ({ className, ...props }: ComponentProps) => (
-    <h1 className={cn("text-heading-48", className)} {...props} />
+  h1: ({ className, children, ...props }: ComponentProps) => (
+    <Header as="h1" size="48" className={cn(className)} {...props}>
+      {children}
+    </Header>
   ),
-  h2: ({ className, ...props }: ComponentProps) => (
-    <h2
-      className={cn("text-heading-32 [&:not(:first-child)]:mt-6", className)}
-      {...props}
-    />
+  h2: ({ className, children, ...props }: ComponentProps) => (
+    <Header as="h2" size="40" className={cn(className)} {...props}>
+      {children}
+    </Header>
   ),
-  h3: ({ className, ...props }: ComponentProps) => (
-    <h3
-      className={cn("text-heading-24 [&:not(:first-child)]:mt-6", className)}
-      {...props}
-    />
+  h3: ({ className, children, ...props }: ComponentProps) => (
+    <Header as="h3" size="32" className={cn(className)} {...props}>
+      {children}
+    </Header>
   ),
-  h4: ({ className, ...props }: ComponentProps) => (
-    <h4
-      className={cn("text-heading-20 [&:not(:first-child)]:mt-6", className)}
-      {...props}
-    />
+  h4: ({ className, children, ...props }: ComponentProps) => (
+    <Header as="h4" size="24" className={cn(className)} {...props}>
+      {children}
+    </Header>
   ),
-  h5: ({ className, ...props }: ComponentProps) => (
-    <h5
-      className={cn("text-heading-18 [&:not(:first-child)]:mt-6", className)}
-      {...props}
-    />
+  h5: ({ className, children, ...props }: ComponentProps) => (
+    <Header as="h5" size="20" className={cn(className)} {...props}>
+      {children}
+    </Header>
   ),
-  h6: ({ className, ...props }: ComponentProps) => (
-    <h6
-      className={cn("text-heading-16 [&:not(:first-child)]:mt-6", className)}
-      {...props}
-    />
+  h6: ({ className, children, ...props }: ComponentProps) => (
+    <Header as="h6" size="16" className={cn(className)} {...props}>
+      {children}
+    </Header>
   ),
-  a: ({ className, ...props }: ComponentProps) => (
-    <a
+  a: ({
+    className,
+    children,
+    href,
+    ...props
+  }: ComponentProps & { href: string }) => (
+    <Link
+      href={href}
       className={cn("text-copy-16 underline underline-offset-4", className)}
       {...props}
-    />
+    >
+      {children}
+    </Link>
   ),
-  p: ({ className, ...props }: ComponentProps) => (
-    <p
+  p: ({ className, children, ...props }: ComponentProps) => (
+    <Copy
       className={cn("text-copy-16 [&:not(:first-child)]:mt-6", className)}
       {...props}
-    />
+    >
+      {children}
+    </Copy>
   ),
   ul: ({ className, ...props }: ComponentProps) => (
     <ul className={cn("my-6 ml-6 list-disc", className)} {...props} />

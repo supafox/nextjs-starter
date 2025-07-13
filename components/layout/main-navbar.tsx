@@ -6,7 +6,7 @@ import { Icons } from "@/assets/icons";
 import { siteConfig } from "@/data/site";
 import { Cross, Menu } from "@supafox/icons";
 
-import { ThemeToggle } from "@/components/theme-toggle";
+import { ThemeToggle } from "@/components/ui/theme-toggle";
 
 export default function MainNavbar() {
   const pathname = usePathname();
