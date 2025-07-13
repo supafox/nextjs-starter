@@ -15,7 +15,13 @@ type ResponsiveSize<T extends string> =
       "2xl"?: T;
     };
 
-// Utility function to handle responsive size props
+/**
+ * Extracts responsive size values from a `ResponsiveSize` prop, mapping the `sm` size to the default and assigning other breakpoints to their respective keys.
+ *
+ * If the input is a string, it is used as the default size and all responsive sizes are undefined. If the input is an object, the `sm` property becomes the default size, and other breakpoints (`md`, `lg`, `xl`, `2xl`) are mapped accordingly.
+ *
+ * @returns An object containing the default size and responsive sizes for each breakpoint.
+ */
 function getResponsiveSizeValues<T extends string>(
   size: ResponsiveSize<T> | undefined
 ) {
@@ -40,7 +46,16 @@ function getResponsiveSizeValues<T extends string>(
   };
 }
 
-// Utility function to build responsive class names
+/**
+ * Generates an array of responsive CSS class names based on provided size values and a class mapping.
+ *
+ * For each size breakpoint, selects the corresponding class from the mapping or constructs a fallback class name if not found. The default size is used as the base class, while `md`, `lg`, `xl`, and `2xl` are applied as responsive variants.
+ *
+ * @param sizes - An object specifying the default and responsive size values to use for class generation
+ * @param classMap - A mapping of breakpoint keys to objects that map size values to CSS class names
+ * @param classPrefix - The prefix to use when constructing fallback class names if a mapping is missing
+ * @returns An array of CSS class names for the specified sizes and breakpoints
+ */
 function buildResponsiveClassNames<T extends string>(
   sizes: {
     defaultSize?: T;

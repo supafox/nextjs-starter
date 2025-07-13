@@ -38,6 +38,13 @@ async function getLegalFromParams(params: Awaited<Props["params"]>) {
   return legal;
 }
 
+/**
+ * Generates dynamic metadata for a legal document page, including title, description, Open Graph, and Twitter card information.
+ *
+ * If the specified legal document is not found, returns an empty metadata object.
+ *
+ * @returns Metadata object for the legal document page
+ */
 export async function generateMetadata(
   { params }: Props,
   parent: ResolvingMetadata
@@ -94,6 +101,11 @@ export async function generateStaticParams(): Promise<
     }));
 }
 
+/**
+ * Renders a legal document page based on route parameters.
+ *
+ * Displays the legal document's hero section with its page title and description, followed by the document content. If the document is not found, triggers a 404 page.
+ */
 export default async function LegalPage({ params }: Props) {
   const resolvedParams = await params;
   const legal = await getLegalFromParams(resolvedParams);

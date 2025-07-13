@@ -29,6 +29,13 @@ function useReducedMotion() {
   return prefersReducedMotion;
 }
 
+/**
+ * Provides the main application layout with animated transitions that respect the user's reduced motion preference.
+ *
+ * Renders a navigation bar, main content area, footer, and a Tailwind indicator, applying fade animations unless reduced motion is preferred.
+ *
+ * @param children - The content to display within the main layout
+ */
 export default function MainLayout({
   children,
 }: {

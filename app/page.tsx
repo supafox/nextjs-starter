@@ -57,7 +57,12 @@ const providers: Provider[] = [
   },
 ];
 
-// Type guard to safely check if an icon exists in AllIcons
+/**
+ * Determines whether the given icon name corresponds to a valid key in the AllIcons object.
+ *
+ * @param iconName - The name of the icon to check
+ * @returns True if the icon name exists in AllIcons; otherwise, false
+ */
 function isValidIcon(iconName: string): iconName is keyof typeof AllIcons {
   return iconName in AllIcons;
 }
@@ -87,6 +92,13 @@ function getIconComponent(
   return null;
 }
 
+/**
+ * Renders the main landing page showcasing the Next.js starter project and its technology stack.
+ *
+ * Displays a hero section with project information and action buttons, followed by a section highlighting the stack's providers in a responsive grid.
+ *
+ * @returns The React element for the home page.
+ */
 export default function Home() {
   return (
     <>

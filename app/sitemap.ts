@@ -3,11 +3,9 @@ import type { MetadataRoute } from "next";
 import { publicUrl } from "@/lib/utils";
 
 /**
- * Generates a sitemap containing multiple entries for the application's base URL and legal pages.
+ * Generates a sitemap with entries for the application's base URL and legal pages.
  *
- * @returns An array with sitemap entries including the base URL, legal index page, privacy policy, and terms of service.
- * Each entry includes the URL, current date as last modified, yearly change frequency, and highest priority (1.0).
- *
+ * @returns An array of sitemap entries, each specifying the URL, last modified date, change frequency, and priority.
  */
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = publicUrl();

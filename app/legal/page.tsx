@@ -16,6 +16,11 @@ export const metadata = {
   description: "This section includes legal documents for the app.",
 };
 
+/**
+ * Displays a list of published legal documents, sorted by date, with links to their details.
+ *
+ * Renders a hero section with a header and description, followed by a grid of legal document cards. If no documents are published, shows a muted message instead.
+ */
 export default function LegalsPage() {
   const legals = allLegals
     .filter((legal) => legal.published)

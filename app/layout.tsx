@@ -15,14 +15,11 @@ export const metadata: Metadata = {
 };
 
 /**
- * Root layout component for the application, providing global HTML structure, theme support, and font styling.
+ * Defines the root layout for the application, applying global HTML structure, font styles, and theme configuration.
  *
- * Wraps all pages with a consistent layout, applies global fonts and background, and configures the theme provider with system theme support. If a valid nonce is present in the request headers, it is passed to the theme provider for enhanced CSP compatibility.
+ * Wraps all pages with a consistent layout, applies global fonts and background, and configures the theme provider to support system themes. If a valid Base64 nonce is present in the request headers, it is passed to the theme provider for CSP compatibility; otherwise, the nonce is omitted.
  *
- * @param children - The content to render within the layout.
- *
- * @remark
- * If the `x-nonce` header is present but does not match the expected format, a warning is logged and the nonce is not applied.
+ * @param children - The content to display within the layout.
  */
 export default async function RootLayout({
   children,

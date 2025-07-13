@@ -10,6 +10,11 @@ import { AnimatePresence, motion as m } from "motion/react";
 import { Separator } from "@/components/ui/separator";
 import { ThemeToggle } from "@/components/ui/theme-toggle";
 
+/**
+ * Renders a responsive navigation bar with animated mobile menu for the site.
+ *
+ * Displays the site logo, navigation links, and a theme toggle. On desktop, navigation links and theme toggle are shown inline. On mobile, a menu button toggles an animated full-screen menu containing navigation links and the theme toggle. The active navigation link is visually highlighted.
+ */
 export default function MainNavbar() {
   const pathname = usePathname();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);

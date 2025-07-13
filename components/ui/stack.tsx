@@ -32,6 +32,13 @@ export interface StackProps {
   className?: string;
 }
 
+/**
+ * Renders a flexbox container with configurable direction and gap, supporting responsive breakpoints.
+ *
+ * The `Stack` component arranges its children in a row or column, with optional responsive direction and spacing. It dynamically generates Tailwind CSS class names based on the provided props and allows additional custom classes.
+ *
+ * @returns A `<div>` element wrapping the children with the computed flexbox and spacing classes.
+ */
 export function Stack({
   children,
   direction = "column",

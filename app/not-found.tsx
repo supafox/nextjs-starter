@@ -5,6 +5,9 @@ import { Section } from "@/components/ui/section";
 import { Stack } from "@/components/ui/stack";
 import { Copy, Header } from "@/components/ui/text";
 
+/**
+ * Renders a centred 404 error page with a playful message and a button to return to the home page.
+ */
 export default function NotFound() {
   return (
     <Section id="not-found" className="flex flex-col py-0 -mt-16">

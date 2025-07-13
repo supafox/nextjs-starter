@@ -3,12 +3,11 @@ import type { MetadataRoute } from "next";
 import { publicUrl } from "@/lib/utils";
 
 /**
- * Generates robots.txt rules and sitemap URL for the application.
+ * Returns the robots.txt configuration for the application, specifying crawling rules and the absolute sitemap URL.
  *
- * Returns a configuration object specifying user-agent-specific crawling rules and the absolute sitemap URL, based on the application's base URL from the environment.
+ * The configuration allows all user agents to crawl the root path while disallowing access to sensitive or internal routes. The sitemap property provides the absolute URL to the sitemap based on the application's base URL.
  *
- * @returns A {@link MetadataRoute.Robots} object containing robots.txt directives and sitemap location.
- *
+ * @returns The robots.txt directives and sitemap location as a MetadataRoute.Robots object.
  */
 export default function robots(): MetadataRoute.Robots {
   const baseUrl = publicUrl();

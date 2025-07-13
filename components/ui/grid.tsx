@@ -62,14 +62,9 @@ export interface GridProps {
 }
 
 /**
- * Grid component for creating responsive grid layouts.
+ * Renders a responsive grid layout with configurable columns, rows, and spacing, supporting Tailwind CSS breakpoints.
  *
- * @param children - Grid content
- * @param columns - Number of columns or responsive object (e.g., { sm: 1, md: 2, lg: 3 })
- * @param rows - Number of rows or responsive object
- * @param gap - Gap between grid items. Valid values: 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 20, 24, 28, 32, 36, 40, 44, 48, 52, 56, 60, 64, 72, 80, 96
- * @param showGuides - Show grid guide borders for debugging
- * @param className - Additional CSS classes
+ * The grid supports customisable gaps validated against the Tailwind spacing scale, and can display visual guide borders for debugging. Guide visibility is propagated to child `GridCell` components.
  */
 export function Grid({
   children,

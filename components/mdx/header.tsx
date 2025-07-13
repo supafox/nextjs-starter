@@ -8,6 +8,14 @@ interface MdxHeaderProps extends React.HTMLAttributes<HTMLDivElement> {
   text?: string;
 }
 
+/**
+ * Renders a header section with a main heading and optional descriptive text.
+ *
+ * Displays the heading as a prominent title and, if provided, shows additional text below it.
+ *
+ * @param heading - The main header text to display
+ * @param text - Optional descriptive text shown below the heading
+ */
 export function MdxHeader({
   heading,
   text,

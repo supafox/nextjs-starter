@@ -22,7 +22,12 @@ export interface SectionProps {
 }
 
 /**
- * Builds gap-related class names for flex containers
+ * Generates an array of Tailwind CSS class names for flex containers with gap spacing, supporting both fixed and responsive gap values.
+ *
+ * If a numeric gap is provided, returns the corresponding gap class or a direct Tailwind gap class. For responsive gap objects, applies the smallest breakpoint as the base gap and adds responsive classes for larger breakpoints as specified.
+ *
+ * @param gap - The gap value or responsive gap object to convert into class names
+ * @returns An array of class names for flex layout and gap spacing
  */
 function buildGapClasses(gap: SectionProps["gap"]): string[] {
   if (!gap) return [];
@@ -71,6 +76,14 @@ function buildGapClasses(gap: SectionProps["gap"]): string[] {
   return flexClassNames;
 }
 
+/**
+ * Renders a section element with configurable padding, optional full-width breakout, and responsive gap layout for its children.
+ *
+ * If `fullWidth` is enabled, the section breaks out of its container to span the entire viewport width. When a `gap` is provided, children are wrapped in a flex column with responsive spacing between them. The `hero` prop increases vertical padding for prominent sections.
+ *
+ * @param id - The unique identifier for the section element
+ * @param children - The content to display within the section
+ */
 export function Section({
   children,
   id,
