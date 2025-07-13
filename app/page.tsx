@@ -1,6 +1,16 @@
 import Link from "next/link";
 
-import * as AllIcons from "@supafox/icons";
+import {
+  LogoContentlayer,
+  LogoEslint,
+  LogoMotion,
+  LogoNext,
+  LogoPrettier,
+  LogoShadcn,
+  LogoSupafox,
+  LogoTailwindcss,
+  LogoVercel,
+} from "@supafox/icons";
 
 import { Provider } from "@/lib/types";
 
@@ -9,6 +19,18 @@ import { Grid, GridCell } from "@/components/ui/grid";
 import { Section } from "@/components/ui/section";
 import { Stack } from "@/components/ui/stack";
 import { Copy, Header } from "@/components/ui/text";
+
+// Icon map for provider logos
+const iconMap = {
+  LogoSupafox,
+  LogoNext,
+  LogoTailwindcss,
+  LogoShadcn,
+  LogoMotion,
+  LogoEslint,
+  LogoPrettier,
+  LogoContentlayer,
+} as const;
 
 const providers: Provider[] = [
   {
@@ -53,34 +75,9 @@ const providers: Provider[] = [
   },
 ];
 
-// Type guard to safely check if an icon exists in AllIcons
-function isValidIcon(iconName: string): iconName is keyof typeof AllIcons {
-  return iconName in AllIcons;
-}
-
-// Helper function to safely get an icon component
-function getIconComponent(
-  iconName: string
-): React.ComponentType<React.SVGProps<SVGSVGElement>> | null {
-  if (!isValidIcon(iconName)) {
-    // eslint-disable-next-line no-console
-    console.warn(`Icon "${iconName}" not found in AllIcons`);
-    return null;
-  }
-
-  const IconComponent = AllIcons[iconName];
-
-  // Additional runtime check to ensure it's a valid React component
-  if (
-    typeof IconComponent === "function" ||
-    typeof IconComponent === "object"
-  ) {
-    return IconComponent as React.ComponentType<React.SVGProps<SVGSVGElement>>;
-  }
-
-  // eslint-disable-next-line no-console
-  console.warn(`Icon "${iconName}" is not a valid React component`);
-  return null;
+// Helper function to safely get an icon component from the icon map
+function getIconComponent(iconName: string) {
+  return iconMap[iconName as keyof typeof iconMap] || null;
 }
 
 export default function Home() {
@@ -107,7 +104,7 @@ export default function Home() {
             target="_blank"
             rel="noopener noreferrer"
           >
-            <AllIcons.LogoVercel />
+            <LogoVercel />
             Deploy now
           </Link>
           <Link

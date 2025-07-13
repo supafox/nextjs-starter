@@ -86,7 +86,9 @@ export function Section({
   const sectionContent = (
     <section id={id} className={cn(basePaddingClass, !gap && className)}>
       {gap ? (
-        <div className={cn(...buildGapClasses(gap), className)}>{children}</div>
+        <div className={cn("container", ...buildGapClasses(gap), className)}>
+          {children}
+        </div>
       ) : (
         children
       )}
@@ -96,14 +98,7 @@ export function Section({
   // Full-width breakout technique: negative margins to escape container constraints
   if (fullWidth) {
     return (
-      <div
-        className={cn(
-          "relative w-screen left-1/2 right-1/2 -ml-[50vw] -mr-[50vw]",
-          gap && className
-        )}
-      >
-        <div className="container">{sectionContent}</div>
-      </div>
+      <div className={cn("bg-primary", gap && className)}>{sectionContent}</div>
     );
   }
 

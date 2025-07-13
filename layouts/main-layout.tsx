@@ -56,7 +56,7 @@ export default function MainLayout({
   return (
     <motion.div {...animationConfig}>
       <MainNavbar />
-      <main className="flex-1 container pt-16 min-h-dvh">{children}</main>
+      <main className="flex-1 pt-16 min-h-dvh">{children}</main>
       <MainFooter />
       <TailwindIndicator />
     </motion.div>

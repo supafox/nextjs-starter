@@ -1,8 +1,9 @@
 import Link from "next/link";
 
-import { Copy } from "@/components/ui/text";
+import { siteConfig } from "@/data/site";
 
-import { Stack } from "../ui/stack";
+import { Stack } from "@/components/ui/stack";
+import { Copy } from "@/components/ui/text";
 
 export default function MainFooter() {
   return (
@@ -13,7 +14,8 @@ export default function MainFooter() {
         className="items-center md:justify-between container"
       >
         <Copy size="14">
-          SuperBrand &copy; {new Date().getFullYear()}. All rights reserved.
+          {siteConfig.name} &copy; {new Date().getFullYear()}. All rights
+          reserved.
         </Copy>
         <Stack gap={4} direction="row">
           <Link href="/legal/privacy" className="text-copy-14 hover:underline">
