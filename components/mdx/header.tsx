@@ -1,5 +1,8 @@
 import { cn } from "@/lib/utils";
 
+import { Stack } from "@/components/ui/stack";
+import { Copy, Header } from "@/components/ui/text";
+
 interface MdxHeaderProps extends React.HTMLAttributes<HTMLDivElement> {
   heading: string;
   text?: string;
@@ -13,11 +16,12 @@ export function MdxHeader({
 }: MdxHeaderProps) {
   return (
     <>
-      <div className={cn("space-y-4", className)} {...props}>
-        <h1 className="text-heading-48">{heading}</h1>
-        {text && <p className="text-copy-16">{text}</p>}
-      </div>
-      <hr className="my-4" />
+      <Stack className={cn("space-y-4", className)} {...props}>
+        <Header as="h1" size="48">
+          {heading}
+        </Header>
+        {text && <Copy>{text}</Copy>}
+      </Stack>
     </>
   );
 }

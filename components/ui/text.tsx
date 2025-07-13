@@ -31,8 +31,8 @@ function getResponsiveSizeValues<T extends string>(
   }
 
   return {
-    defaultSize: undefined,
-    smSize: size?.sm,
+    defaultSize: size?.sm, // Set sm as the default
+    smSize: undefined, // Don't use smSize since it's now the default
     mdSize: size?.md,
     lgSize: size?.lg,
     xlSize: size?.xl,
@@ -69,9 +69,8 @@ function buildResponsiveClassNames<T extends string>(
     }
   }
 
-  // Handle responsive sizes
+  // Handle responsive sizes - skip sm since it becomes the default
   const responsiveSizes = [
-    { key: "sm" as const, size: sizes.smSize },
     { key: "md" as const, size: sizes.mdSize },
     { key: "lg" as const, size: sizes.lgSize },
     { key: "xl" as const, size: sizes.xlSize },

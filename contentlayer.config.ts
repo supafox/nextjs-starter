@@ -23,13 +23,20 @@ export const Legal = defineDocumentType(() => ({
   filePathPattern: "legal/**/*.mdx",
   contentType: "mdx",
   fields: {
-    title: {
+    pageTitle: {
       type: "string",
       required: true,
     },
-    description: {
+    pageDescription: {
       type: "string",
       required: true,
+    },
+    metaTitle: {
+      type: "string",
+      required: true,
+    },
+    metaDescription: {
+      type: "string",
     },
     date: {
       type: "date",

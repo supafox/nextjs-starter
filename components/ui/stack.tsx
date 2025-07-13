@@ -57,8 +57,24 @@ export function Stack({
     // Handle responsive direction with proper CSS cascade
     const responsiveClasses: string[] = [];
 
+    // Set a default base direction (use the smallest breakpoint or default to column)
+    const defaultDirection =
+      direction.sm ||
+      direction.md ||
+      direction.lg ||
+      direction.xl ||
+      direction["2xl"] ||
+      "column";
+    const defaultDirectionClass = directionClasses[""][defaultDirection];
+    if (defaultDirectionClass) {
+      classNames.push(defaultDirectionClass);
+    }
+
     // Iterate over responsive breakpoints to handle direction classes dynamically
-    RESPONSIVE_BREAKPOINTS.forEach((breakpoint) => {
+    // Skip the smallest breakpoint since it's already set as the base
+    const breakpointsToProcess = RESPONSIVE_BREAKPOINTS.slice(1); // Skip 'sm'
+
+    breakpointsToProcess.forEach((breakpoint) => {
       const directionValue = direction[breakpoint];
       if (directionValue) {
         const directionClass = directionClasses[breakpoint][directionValue];
