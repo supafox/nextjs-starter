@@ -8,7 +8,9 @@ import { headers } from "next/headers";
 
 import { fontMono, fontSans } from "@/assets/fonts";
 import { defaultMeta } from "@/data/metadata";
-import MainLayout from "@/layouts/main-layout";
+
+import MainFooter from "@/components/layout/main-footer";
+import MainNavbar from "@/components/layout/main-navbar";
 
 export const metadata: Metadata = {
   ...defaultMeta,
@@ -55,7 +57,9 @@ export default async function RootLayout({
           enableSystem
           nonce={validNonce}
         >
-          <MainLayout>{children}</MainLayout>
+          <MainNavbar />
+          <main className="flex-1 pt-16 min-h-dvh">{children}</main>
+          <MainFooter />
         </ThemeProvider>
       </body>
     </html>
