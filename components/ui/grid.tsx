@@ -102,6 +102,9 @@ export function Grid({
   } else if (gap) {
     // Handle responsive gap with proper validation
     // Find the smallest defined breakpoint to use as base
+    // The smallest breakpoint value is used as the base gap without a responsive prefix,
+    // reflecting Tailwind's mobile-first approach. This base gap applies to all
+    // screen sizes unless overridden by larger breakpoints.
     let baseBreakpoint: string | null = null;
     let baseGap: number | null = null;
 

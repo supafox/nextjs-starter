@@ -3,6 +3,43 @@
 export const RESPONSIVE_BREAKPOINTS = ["sm", "md", "lg", "xl", "2xl"] as const;
 export type Breakpoint = "" | (typeof RESPONSIVE_BREAKPOINTS)[number];
 
+// Alignment classes for Section and other components
+export const alignClasses: Record<
+  Breakpoint,
+  Record<"center" | "start" | "end", string[]>
+> = {
+  "": {
+    center: ["items-center", "text-center"],
+    start: ["items-start", "text-left"],
+    end: ["items-end", "text-right"],
+  },
+  sm: {
+    center: ["sm:items-center", "sm:text-center"],
+    start: ["sm:items-start", "sm:text-left"],
+    end: ["sm:items-end", "sm:text-right"],
+  },
+  md: {
+    center: ["md:items-center", "md:text-center"],
+    start: ["md:items-start", "md:text-left"],
+    end: ["md:items-end", "md:text-right"],
+  },
+  lg: {
+    center: ["lg:items-center", "lg:text-center"],
+    start: ["lg:items-start", "lg:text-left"],
+    end: ["lg:items-end", "lg:text-right"],
+  },
+  xl: {
+    center: ["xl:items-center", "xl:text-center"],
+    start: ["xl:items-start", "xl:text-left"],
+    end: ["xl:items-end", "xl:text-right"],
+  },
+  "2xl": {
+    center: ["2xl:items-center", "2xl:text-center"],
+    start: ["2xl:items-start", "2xl:text-left"],
+    end: ["2xl:items-end", "2xl:text-right"],
+  },
+};
+
 // Gap classes for Stack and Section
 export const gapClasses: Record<Breakpoint, Record<number, string>> = {
   "": {

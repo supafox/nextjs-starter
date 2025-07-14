@@ -31,6 +31,9 @@ function getResponsiveSizeValues<T extends string>(
   }
 
   return {
+    // The sm breakpoint value is used as the base size without a responsive prefix,
+    // reflecting Tailwind's mobile-first approach. This base size applies to all
+    // screen sizes unless overridden by larger breakpoints.
     defaultSize: size?.sm, // Set sm as the default
     smSize: undefined, // Don't use smSize since it's now the default
     mdSize: size?.md,

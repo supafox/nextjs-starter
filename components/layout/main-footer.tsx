@@ -20,12 +20,15 @@ export default function MainFooter() {
           reserved.
         </Copy>
         <Stack gap={4} direction="row">
-          <Link href="/legal/privacy" className="text-copy-14 hover:underline">
-            Privacy
-          </Link>
-          <Link href="/legal/terms" className="text-copy-14 hover:underline">
-            Terms
-          </Link>
+          {siteConfig.policyLinks.map((link) => (
+            <Link
+              key={link.title}
+              href={link.href}
+              className="text-copy-14 hover:underline"
+            >
+              {link.title}
+            </Link>
+          ))}
         </Stack>
       </Stack>
     </footer>

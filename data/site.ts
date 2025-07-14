@@ -16,6 +16,16 @@ export const siteConfig = {
       href: "/legal/privacy",
     },
   ],
+  policyLinks: [
+    {
+      title: "Terms",
+      href: "/legal/terms",
+    },
+    {
+      title: "Privacy",
+      href: "/legal/privacy",
+    },
+  ],
   links: {
     twitter: "https://x.com/supafoxDEV",
     github: "https://github.com/supafox",

@@ -1,6 +1,10 @@
 import React, { ReactNode } from "react";
 
-import { gapClasses, RESPONSIVE_BREAKPOINTS } from "@/constants/tailwind";
+import {
+  alignClasses,
+  gapClasses,
+  RESPONSIVE_BREAKPOINTS,
+} from "@/constants/tailwind";
 
 import { cn } from "@/lib/utils";
 
@@ -19,6 +23,17 @@ export interface SectionProps {
         "2xl"?: number;
       };
   className?: string;
+  align?:
+    | "center"
+    | "start"
+    | "end"
+    | {
+        sm?: "center" | "start" | "end";
+        md?: "center" | "start" | "end";
+        lg?: "center" | "start" | "end";
+        xl?: "center" | "start" | "end";
+        "2xl"?: "center" | "start" | "end";
+      };
 }
 
 /**
@@ -71,6 +86,37 @@ function buildGapClasses(gap: SectionProps["gap"]): string[] {
   return flexClassNames;
 }
 
+/**
+ * Gets alignment classes for the specified alignment
+ */
+function getAlignClasses(align: SectionProps["align"]): string[] {
+  if (typeof align === "string" || !align) {
+    return (
+      alignClasses[""]?.[align || "center"] || ["items-center", "text-center"]
+    );
+  }
+
+  // Handle responsive alignment
+  const classes: string[] = [];
+  // The sm breakpoint value is used as the base alignment without a responsive prefix,
+  // reflecting Tailwind's mobile-first approach. This base alignment applies to all
+  // screen sizes unless overridden by larger breakpoints.
+  const defaultAlign =
+    align.sm || align.md || align.lg || align.xl || align["2xl"] || "center";
+  classes.push(
+    ...(alignClasses[""]?.[defaultAlign] || ["items-center", "text-center"])
+  );
+
+  RESPONSIVE_BREAKPOINTS.slice(1).forEach((breakpoint) => {
+    const alignValue = align[breakpoint];
+    if (alignValue) {
+      classes.push(...(alignClasses[breakpoint]?.[alignValue] || []));
+    }
+  });
+
+  return classes;
+}
+
 export function Section({
   children,
   id,
@@ -78,28 +124,29 @@ export function Section({
   hero = false,
   gap,
   className,
+  align = "center",
 }: SectionProps) {
   // Build base padding class
-  const basePaddingClass = hero ? "py-25" : "py-16";
+  const basePaddingClass = hero ? "py-16 md:py-25" : "py-16";
 
   // Build section content with appropriate padding
   const sectionContent = (
-    <section id={id} className={cn(basePaddingClass, !gap && className)}>
-      {gap ? (
-        <div className={cn("container", ...buildGapClasses(gap), className)}>
-          {children}
-        </div>
-      ) : (
-        children
-      )}
+    <section id={id} className={cn(basePaddingClass, className)}>
+      <div
+        className={cn(
+          "container",
+          ...getAlignClasses(align),
+          ...(gap ? buildGapClasses(gap) : [])
+        )}
+      >
+        {children}
+      </div>
     </section>
   );
 
   // Full-width breakout technique: negative margins to escape container constraints
   if (fullWidth) {
-    return (
-      <div className={cn("bg-primary", gap && className)}>{sectionContent}</div>
-    );
+    return <div className={cn("bg-primary", className)}>{sectionContent}</div>;
   }
 
   return sectionContent;
